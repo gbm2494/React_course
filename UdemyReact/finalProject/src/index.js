@@ -5,33 +5,34 @@ import { createStore, applyMiddleware } from 'redux';
 //BrowserRouter is what interacts with
 //history library and decides what to do
 //based on a change inside the URL
+//----
 //Route is the core of react router, is a react component
 //that we can render inside any other react component
 //that we put together inside our app
 //provides configuration to show specific components
 //depending on URL
-import {BrowserRouter, Route} from 'react-router-dom';
+//----
+//Switch chooses must specific route,
+//it resolves router bug
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import promise from 'redux-promise';
 
-import App from './components/app';
 import reducers from './reducers';
+import PostsIndex from './components/posts_index';
+import PostsNew from './components/posts_new';
+import PostsShow from './components/posts_show';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
-
-class Hello extends React.Component{
-    render() {return <div>Hello!</div>}
-}
-
-class Goodbye extends React.Component{
-    render() {return <div>Goodbye!</div>}
-}
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <div>
-      Header
-        <Route path="/hello" component={Hello}/>
-        <Route path="/goodbye" component={Goodbye}/>
+        <Switch>
+          <Route path="/posts/new" component={PostsNew}/>
+          <Route path="/posts/:id" component={PostsShow}/>
+          <Route path="/" component={PostsIndex}/>
+        </Switch>
       </div>
     </BrowserRouter>
   </Provider>
