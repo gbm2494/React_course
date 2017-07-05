@@ -46,7 +46,7 @@ export class SearchBar extends Component{
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchWeather}, dispatch);
+  return bindActionCreators({fetchWeather}, dispatch);
 }
 
 //the null represent that we don't need any state here

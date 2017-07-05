@@ -10,6 +10,7 @@ class PostsIndex extends Component {
 //the component has shown up inside the DOM.
   componentDidMount(){
     this.props.fetchPosts();
+    console.log(this.props.posts);
   }
 
   renderPosts(){
